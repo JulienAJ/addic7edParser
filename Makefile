@@ -3,6 +3,7 @@ JAVA=java
 JAR=jar cfm
 CLASSDIR=bin/
 SRCDIR=src/
+LIBSDIR=libs/
 NAME=addic7edParser
 JSOUPJAR=jsoup-1.8.3.jar
 COMMONSCLIJAR=commons-cli-1.2.jar
@@ -14,10 +15,10 @@ CLASSEXT=.class
 all: $(NAME)$(JAREXT)
 
 source: $(SRCDIR)*$(JAVAEXT)
-	$(JAVAC) -classpath $(JSOUPJAR):$(COMMONSCLIJAR):$(CLASSDIR):. -d $(CLASSDIR) $^
+	$(JAVAC) -classpath $(LIBSDIR)$(JSOUPJAR):$(LIBSDIR)$(COMMONSCLIJAR):$(CLASSDIR):. -d $(CLASSDIR) $^
 
 $(NAME)$(JAREXT):source
-	$(JAR) $@ $(MANIFEST) $(COMMONSCLIJAR) $(JSOUPJAR) -C $(CLASSDIR) .
+	$(JAR) $@ $(MANIFEST) -C $(LIBSDIR) . -C $(CLASSDIR) .
 
 clean:
 	@rm -fr $(CLASSDIR)*
