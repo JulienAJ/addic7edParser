@@ -253,7 +253,9 @@ public class Main
         String release = cmd.getOptionValue("r").trim();
         int completion = Integer.parseInt(cmd.getOptionValue("c", "100"));
         boolean forceDownload = cmd.hasOption("fd");
-        String downloadDirectory = cmd.getOptionValue("fd").trim();
+	String downloadDirectory = null;
+	if(forceDownload)
+		downloadDirectory = cmd.getOptionValue("fd").trim();
 
         Episode result = Main.getEpisode(seriesName, season, episode);
 
